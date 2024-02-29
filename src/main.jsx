@@ -8,36 +8,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import store from "./Movie-store/StoreMovie.jsx";
 import { persistStore } from "redux-persist";
 import { I18nextProvider } from "react-i18next";
-import i18next from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+import i18 from "./lib/language/i18.jsx"
 
-import translationEN from "./lib/language/locals/en.json";
-import translationFR from "./lib/language/locals/fr.json";
-import translationHI from "./lib/language/locals/hi.json";
-
-i18next.use(LanguageDetector).init({
-  resources: {
-    en: {
-      translation: {
-        navbar: translationEN,
-      },
-    },
-    fr: {
-      translation: {
-        navbar: translationFR,
-      },
-    },
-    hi: {
-      translation: {
-        navbar: translationHI,
-      },
-    },
-  },
-  fallbackLng: "en",
-  interpolation: {
-    escapeValue: false,
-  },
-});
 
 let persistor = persistStore(store);
 
@@ -52,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <I18nextProvider i18n={i18next}>
+          <I18nextProvider i18n={i18}>
             <App />
           </I18nextProvider>
         </PersistGate>
