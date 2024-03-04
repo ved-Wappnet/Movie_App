@@ -1,18 +1,3 @@
-// import {} from "react-router-dom";
-// import { useAuth0 } from "@auth0/auth0-react";
-
-// const WithAuth = ({ children }) => {
-//   const { isAuthenticated, loginWithRedirect } = useAuth0();
-
-//   if (!isAuthenticated) {
-//     loginWithRedirect();
-//     // return <></>
-//   }
-
-//   return children;
-// };
-
-// export default WithAuth;
 
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";

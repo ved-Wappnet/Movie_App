@@ -12,6 +12,7 @@ import { Badge } from "primereact/badge";
 import { Dropdown } from "primereact/dropdown";
 import { selectFavoritesCount } from "../Movie-Reducer/favoriteSlice";
 import { useSelector } from "react-redux";
+// import { GoogleLogin } from "@react-oauth/google";
 
 // eslint-disable-next-line react/prop-types
 const Navbar = () => {
@@ -46,7 +47,6 @@ const Navbar = () => {
     setShowProfileMenu(!showProfileMenu);
   };
 
-
   const languageOptions = [
     { label: t("English"), value: "en" },
     { label: t("French"), value: "fr" },
@@ -72,7 +72,14 @@ const Navbar = () => {
             MovieApp
           </Link>
         </div>
-
+        {/* <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        /> */}
         <div className="hidden md:block">
           <ul className="flex space-x-4 w-full ml-44">
             <li>
@@ -117,6 +124,16 @@ const Navbar = () => {
                 }`}
               >
                 {t("navbar.news")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin"
+                className={`${
+                  location.pathname === "/admin" ? "text-red-500" : "text-white"
+                }`}
+              >
+                Admin
               </Link>
             </li>
             {isAuthenticated && (
@@ -182,6 +199,7 @@ const Navbar = () => {
             </div>
           </ul>
         </div>
+
         <div className="md:hidden">
           <button onClick={() => setShowMenu(!showMenu)}>
             {showMenu ? (

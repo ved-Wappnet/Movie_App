@@ -9,6 +9,7 @@ import store from "./Movie-store/StoreMovie.jsx";
 import { persistStore } from "redux-persist";
 import { I18nextProvider } from "react-i18next";
 import i18 from "./lib/language/i18.jsx"
+import { GoogleOAuthProvider } from '@react-oauth/google';  
 
 
 let persistor = persistStore(store);
@@ -25,7 +26,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <I18nextProvider i18n={i18}>
+          <GoogleOAuthProvider clientId="301435388222-8solr6k5bge75lsc361m5a3gdadcmel8.apps.googleusercontent.com">
             <App />
+            </GoogleOAuthProvider>
           </I18nextProvider>
         </PersistGate>
       </Provider>

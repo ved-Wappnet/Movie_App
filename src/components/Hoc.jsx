@@ -17,6 +17,7 @@ const Hoc = ({ children }) => {
     handleToggleFavorite,
     toast,
   } = useClassicMovie("Marvel");
+  
   const dispatch = useDispatch();
 
   if (loading) {

@@ -30,10 +30,12 @@ import Footer from "./components/Footer";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import Admin from "./components/layouts/Admin";
+import Dashboard from "./pages/Admin/Dashboard";
+import Admincontact from "./pages/Admin//Admincontact";
+import Adminservice from "./pages/Admin//Adminservice";
 
 function App() {
-
-
   const [themeMode, setThemeMode] = useState("light");
 
   const toggleTheme = () => {
@@ -106,6 +108,11 @@ function App() {
                   </React.Suspense>
                 }
               />
+            </Route>
+            <Route path="/admin" element={<Admin />}>
+              <Route path="user" element={<Dashboard />} />
+              <Route path="contact" element={<Admincontact />} />
+              <Route path="services" element={<Adminservice />} />
             </Route>
           </Routes>
         </Router>
