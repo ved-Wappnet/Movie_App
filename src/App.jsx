@@ -1,39 +1,35 @@
-import "./App.css";
 import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
   Route,
-  BrowserRouter as Router,
-  Routes,
   Outlet,
 } from "react-router-dom";
-import Home from "./components/Home";
-// import ActionMovies from "./components/ActionMovies";
-// import TVShows from "./components/ClassicMovies";
-// import MovieDetail from "./pages/MovieDetail";
-// import NewsDisplay from "./pages/NewsDisplay";
-import Navbar from "./components/Navbar";
 import React, { useState } from "react";
 import Spinner from "./components/Spinner";
-// import { useDispatch, useSelector } from "react-redux";
-// const LazyAction = React.lazy(() => import("./components/ActionMovies"));
-const LazyClassic = React.lazy(() => import("./components/ClassicMovies"));
-const LazyMovieDetail = React.lazy(() => import("./pages/MovieDetail"));
-const LazyNews = React.lazy(() => import("./pages/NewsDisplay"));
+import Home from "./components/Home";
+import Hoc from "./components/Hoc";
+import LazyClassic from "./components/ClassicMovies";
+import LazyMovieDetail from "./pages/MovieDetail";
+import LazyNews from "./pages/NewsDisplay";
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
 import FavoriteMovies from "./components/FavoriteMovies";
 import ContactUs from "./pages/ContactUs";
 import { ThemeProvider } from "./Context/ThemeContext";
-import Hoc from "./components/Hoc";
 import WithAuth from "./Validations/WithAuth";
-import Footer from "./components/Footer";
+import Admin from "./components/layouts/Admin";
+import Dashboard from "./pages/Admin/Dashboard";
+import Admincontact from "./pages/Admin/Admincontact";
+import Adminservice from "./pages/Admin/Adminservice";
+import Profile from "./pages/Admin/Adminpages/Profile";
+import Page404 from "./pages/Admin/Page404";
+import Settings from "./pages/Admin/Adminpages/Settings";
+import Pricing from "./pages/Admin/Adminpages/Pricing";
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import Admin from "./components/layouts/Admin";
-import Dashboard from "./pages/Admin/Dashboard";
-import Admincontact from "./pages/Admin//Admincontact";
-import Adminservice from "./pages/Admin//Adminservice";
 
 function App() {
   const [themeMode, setThemeMode] = useState("light");
@@ -42,83 +38,81 @@ function App() {
     setThemeMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route path="/" element={<Outlet />}>
+          <Route
+            index
+            element={
+              <WithAuth>
+                <Home />
+              </WithAuth>
+            }
+          />
+          <Route path="/action-movies" element={<Hoc />} />
+          <Route
+            path="/tv-shows"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <LazyClassic />
+              </React.Suspense>
+            }
+          />
+          <Route path="/favorites" element={<FavoriteMovies />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route
+            path="/news"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <LazyNews />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/movie/:imdbID"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <LazyMovieDetail />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <Login />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <React.Suspense fallback={<Spinner />}>
+                <Signup />
+              </React.Suspense>
+            }
+          />
+        </Route>
+        <Route path="/admin" element={<Admin />}>
+          <Route path="user" element={<Dashboard />} />
+          <Route path="pages">
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="pricing" element={<Pricing />} />
+            <Route path="404" element={<Page404 />} />
+          </Route>
+          <Route path="contact" element={<Admincontact />} />
+          <Route path="services" element={<Adminservice />} />
+        </Route>
+      </>
+    )
+  );
+
   return (
-    <>
-      <ThemeProvider value={{ themeMode, toggleTheme }}>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Outlet />}>
-              <Route
-                index
-                element={
-                  <WithAuth>
-                    <Home />
-                  </WithAuth>
-                }
-              />
-              {/* <Route
-              path="/action-movies"
-              element={
-                <React.Suspense fallback={<Spinner />}>
-                  <LazyAction />
-                </React.Suspense>
-              }
-            /> */}
-              <Route path="/action-movies" element={<Hoc />} />
-              <Route
-                path="/tv-shows"
-                element={
-                  <React.Suspense fallback={<Spinner />}>
-                    <LazyClassic />
-                  </React.Suspense>
-                }
-              />
-              <Route path="/favorites" element={<FavoriteMovies />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route
-                path="/news"
-                element={
-                  <React.Suspense fallback={<Spinner />}>
-                    <LazyNews />
-                  </React.Suspense>
-                }
-              />
-              <Route
-                path="/movie/:imdbID"
-                element={
-                  <React.Suspense fallback={<Spinner />}>
-                    <LazyMovieDetail />
-                  </React.Suspense>
-                }
-              />
-              <Route
-                path="/login"
-                element={
-                  <React.Suspense fallback={<Spinner />}>
-                    <Login />
-                  </React.Suspense>
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <React.Suspense fallback={<Spinner />}>
-                    <Signup />
-                  </React.Suspense>
-                }
-              />
-            </Route>
-            <Route path="/admin" element={<Admin />}>
-              <Route path="user" element={<Dashboard />} />
-              <Route path="contact" element={<Admincontact />} />
-              <Route path="services" element={<Adminservice />} />
-            </Route>
-          </Routes>
-        </Router>
-      </ThemeProvider>
-      <Footer />
-    </>
+    <ThemeProvider value={{ themeMode, toggleTheme }}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 

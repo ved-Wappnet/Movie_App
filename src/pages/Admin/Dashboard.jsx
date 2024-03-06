@@ -48,8 +48,8 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center mt-20 w-full">
-      <div className="w-full max-w-screen-lg p-9 h-[100vh]">
+    <div className="flex flex-col items-center mt-16 w-full">
+      <div className="w-full p-9 h-[100vh]">
         <div className="bg-gray-200 p-4 rounded-md mb-4">
           <input
             type="text"
@@ -62,7 +62,6 @@ const Dashboard = () => {
             Search
           </button>
         </div>
-        <div className="bg-purple-400 h-16 abso">Projects</div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 relative">
           <div className="bg-white p-4 rounded-md shadow-md h-[90%]">

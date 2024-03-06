@@ -130,7 +130,9 @@ const Navbar = () => {
               <Link
                 to="/admin"
                 className={`${
-                  location.pathname === "/admin" ? "text-red-500" : "text-white"
+                  location.pathname.startsWith("/admin")
+                    ? "text-red-500"
+                    : "text-white"
                 }`}
               >
                 Admin

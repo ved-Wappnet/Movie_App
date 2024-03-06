@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 // import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ApiClient from "../utils/ApiClient";
 import Spinner from "../components/Spinner";
 import { ThemeContext } from "../Context/ThemeContext";
@@ -12,6 +12,7 @@ const MovieDetail = () => {
   const [error, setError] = useState(null);
 
   const { themeMode } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMovieDetail = async () => {
@@ -54,7 +55,7 @@ const MovieDetail = () => {
             : "bg-gray-200 text-black"
         }`}
       >
-        <section className="text-gray-600 body-font pt-20">
+        <section className="text-gray-600 body-font pt-10">
           <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
             <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
               <img
@@ -114,12 +115,18 @@ const MovieDetail = () => {
                 Awards : {movieDetail.Awards}
               </p>
               <p
-                className={`text-sm mt-2 font-bold mb-4 ${
+                className={`text-sm mt-2 font-bold mb-6 ${
                   themeMode === "dark" ? "text-white" : "text-gray-500"
                 }`}
               >
                 Plot : {movieDetail.Plot}
               </p>
+              <button
+                className="bg-red-500 text-white px-3 py-2 rounded-xl font-medium"
+                onClick={() => navigate(-1)}
+              >
+                Go Back
+              </button>
             </div>
           </div>
         </section>

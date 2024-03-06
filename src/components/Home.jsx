@@ -9,6 +9,7 @@ import Spinner from "./Spinner";
 import searchMovies from "../services/Path";
 import { toggleFavorite } from "../Movie-Reducer/favoriteSlice";
 import { ThemeContext } from "../Context/ThemeContext";
+import Outer from "./layouts/Outer";
 
 // eslint-disable-next-line react/prop-types
 const Home = () => {
@@ -88,71 +89,74 @@ const Home = () => {
   }
 
   return (
-    <div
-      className={`flex-grow ${
-        themeMode === "dark"
-          ? "bg-gray-800 text-white"
-          : "bg-gray-300 text-black"
-      }`}
-    >
-      <div className="flex justify-center mb-4 mt-14">
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-          className="p-2 mr-2 border mt-10"
-          placeholder="Search movies..."
-          style={{ color: themeMode === "dark" ? "black" : "black" }}
-        />
-        <button
-          onClick={handleSearch}
-          className="bg-red-500 text-white p-2 rounded mt-10"
-        >
-          Search
-        </button>
-      </div>
-      <h1 className="text-2xl font-bold mb-4 text-center">Home Page</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {movies?.Search?.map((movie) => (
-          <div
-            key={movie.imdbID}
-            className="bg-white shadow-lg rounded-lg  max-w-sm border p-4 w-72  m-4 flex flex-col overflow-hidden "
+    <Outer>
+      <div
+        className={`flex-grow ${
+          themeMode === "dark"
+            ? "bg-gray-800 text-white"
+            : "bg-gray-300 text-black"
+        }`}
+      >
+        <div className="flex justify-center mb-4 mt-14">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+            className="p-2 mr-2 border mt-10"
+            placeholder="Search movies..."
+            style={{ color: themeMode === "dark" ? "black" : "black" }}
+          />
+          <button
+            onClick={handleSearch}
+            className="bg-red-500 text-white p-2 rounded mt-10"
           >
-            <Link
-              to={`/movie/${movie.imdbID}`}
-              className={`text-lg font-bold mb-2 textedit ${
-                themeMode === "dark" ? "text-black" : "text-black"
-              }`}
+            Search
+          </button>
+        </div>
+        <h1 className="text-2xl font-bold mb-4 text-center">Home Page</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {movies?.Search?.map((movie) => (
+            <div
+              key={movie.imdbID}
+              className="bg-white shadow-lg rounded-lg  max-w-sm border p-4 w-72  m-4 flex flex-col overflow-hidden "
             >
-              {movie.Title}
-            </Link>
-            <Link to={`/movie/${movie.imdbID}`}>
-              <img src={movie.Poster} style={{ height: "400px" }} alt="" />
-            </Link>
-            <button
-              onClick={() => handleToggleFavorite(movie)}
-              className="favorite-icon"
-              aria-label="Toggle favorite"
-            >
-              <HeartIcon
-                className={`h-6 w-6 ${
-                  favorites?.findIndex((fav) => fav.imdbID === movie.imdbID) !==
-                  -1
-                    ? "text-red-500"
-                    : "text-gray-500"
+              <Link
+                to={`/movie/${movie.imdbID}`}
+                className={`text-lg font-bold mb-2 textedit ${
+                  themeMode === "dark" ? "text-black" : "text-black"
                 }`}
-              />
-            </button>
-          </div>
-        ))}
+              >
+                {movie.Title}
+              </Link>
+              <Link to={`/movie/${movie.imdbID}`}>
+                <img src={movie.Poster} style={{ height: "400px" }} alt="" />
+              </Link>
+              <button
+                onClick={() => handleToggleFavorite(movie)}
+                className="favorite-icon"
+                aria-label="Toggle favorite"
+              >
+                <HeartIcon
+                  className={`h-6 w-6 ${
+                    favorites?.findIndex(
+                      (fav) => fav.imdbID === movie.imdbID
+                    ) !== -1
+                      ? "text-red-500"
+                      : "text-gray-500"
+                  }`}
+                />
+              </button>
+            </div>
+          ))}
+        </div>
+        <Toast ref={toast} />
       </div>
-      <Toast ref={toast} />
-    </div>
+    </Outer>
   );
 };
 
