@@ -6,6 +6,7 @@ import { HiDocument } from "react-icons/hi2";
 import { TbExchange } from "react-icons/tb";
 import { useState } from "react";
 import Outer from "./Outer";
+import "./Admin.css";
 
 const Admin = () => {
   const [pagesMenuOpen, setPagesMenuOpen] = useState(false);
@@ -18,7 +19,7 @@ const Admin = () => {
   return (
     <Outer>
       <div className="flex">
-        <div className="bg-gray-600 text-gray-300 w-64 min-h-screen overflow-y-auto">
+        <div className="bg-gray-600 text-gray-300 min-h-screen overflow-y-auto sidebar">
           <div className="containe mt-20 0 p-4">
             <h1 className="mx-3 my-3 font-medium text-2xl">Dash UI</h1>
             <nav>
@@ -49,13 +50,13 @@ const Admin = () => {
                   </NavLink>
                   <ul className="flex flex-col">
                     <li>
-                      <div
-                        className={`flex items-center p-2 rounded-md hover:bg-gray-700 cursor-pointer ${
+                      <button
+                        onClick={togglePagesMenu}
+                        className={`flex items-center w-full p-2 rounded-md hover:bg-gray-700 cursor-pointer ${
                           location.pathname.startsWith("/admin/pages")
                             ? "text-red-400"
                             : "text-white"
                         }`}
-                        onClick={togglePagesMenu}
                       >
                         <SiPowerpages className="mr-1" /> Pages
                         <svg
@@ -71,7 +72,7 @@ const Admin = () => {
                             clipRule="evenodd"
                           />
                         </svg>
-                      </div>
+                      </button>
 
                       <ul
                         className={pagesMenuOpen ? "ml-5 block" : "ml-6 hidden"}
@@ -168,8 +169,10 @@ const Admin = () => {
             </nav>
           </div>
         </div>
-        <div className="container mx-auto">
-          <Outlet />
+        <div className="content">
+          <div className="container mx-auto">
+            <Outlet />
+          </div>
         </div>
       </div>
     </Outer>

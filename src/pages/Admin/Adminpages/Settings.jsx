@@ -31,7 +31,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="mt-16 bg-gray-200 h-full">
+    <div className="mt-16 bg-gray-200 h-[100vh] w-[1279px]">
       <div>
         <h1 className="px-4 py-7 text-2xl font-medium">General</h1>
       </div>

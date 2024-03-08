@@ -1,8 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleFavorite ,selectFavoritesCount } from "../Movie-Reducer/favoriteSlice";
+import {
+  toggleFavorite,
+  selectFavoritesCount,
+} from "../Movie-Reducer/favoriteSlice";
 import { ThemeContext } from "../Context/ThemeContext";
 import { useContext } from "react";
 import Outer from "./layouts/Outer";
+import { Link } from "react-router-dom";
 
 const FavoriteMovies = () => {
   const favorites = useSelector((state) => state.favorites);
@@ -35,13 +39,23 @@ const FavoriteMovies = () => {
                   themeMode === "dark" ? "text-black" : ""
                 }`}
               >
-                {movie.Title}
+                <Link
+                  to={`/movie/${movie.imdbID}`}
+                  className="text-lg font-bold mb-2 textedit"
+                >
+                  {movie.Title}
+                </Link>
               </div>
-              <img
-                src={movie.Poster}
-                style={{ height: "400px", maxWidth: "100%" }}
-                alt={movie.Title}
-              />
+              <Link
+                to={`/movie/${movie.imdbID}`}
+                className="text-lg font-bold mb-2 textedit"
+              >
+                <img
+                  src={movie.Poster}
+                  style={{ height: "400px", maxWidth: "100%" }}
+                  alt={movie.Title}
+                />
+              </Link>
               <div
                 className={`text-sm ${
                   themeMode === "dark" ? "text-black" : ""
@@ -68,11 +82,7 @@ const FavoriteMovies = () => {
           ))}
         </div>
         <div className="text-center mt-4">
-          <p
-            className={`text-lg ${
-              themeMode === "dark" ? "text-white" : ""
-            }`}
-          >
+          <p className={`text-lg ${themeMode === "dark" ? "text-white" : ""}`}>
             Favorites Count: {favoritesCount}
           </p>
         </div>

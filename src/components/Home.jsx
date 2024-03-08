@@ -17,6 +17,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("Spider-man");
+  const [suggestions, setSuggestions] = useState([]);
 
   const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
@@ -88,6 +89,25 @@ const Home = () => {
     return <div>Error: {error}</div>;
   }
 
+  const handleChange = async (e) => {
+    const { value } = e.target;
+    setSearchQuery(value);
+
+    try {
+      const response = await searchMovies(value);
+      setSuggestions(response.data.Search.map((movie) => movie.Title));
+      console.log(response.data.Search);
+    } catch (error) {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchQuery(suggestion);
+    setSuggestions([]);
+    handleSearch();
+  };
+
   return (
     <Outer>
       <div
@@ -101,7 +121,7 @@ const Home = () => {
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleChange}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 handleSearch();
@@ -109,7 +129,7 @@ const Home = () => {
             }}
             className="p-2 mr-2 border mt-10"
             placeholder="Search movies..."
-            style={{ color: themeMode === "dark" ? "black" : "black" }}
+            style={{ color: themeMode === "dark" ? "black" : "" }}
           />
           <button
             onClick={handleSearch}
@@ -117,6 +137,24 @@ const Home = () => {
           >
             Search
           </button>
+          {suggestions.length > 0 && (
+            <ul className="absolute top-[20%] w-[18%] overflow-y-auto max-h-[150px] text-black bg-white border border-gray-300 rounded shadow-lg">
+              {suggestions.map((suggestion, index) => (
+                <li
+                  className="px-6 py-2 cursor-pointer hover:bg-gray-200"
+                  key={index}
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch();
+                    }
+                  }}
+                >
+                  {suggestion}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         <h1 className="text-2xl font-bold mb-4 text-center">Home Page</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -128,7 +166,7 @@ const Home = () => {
               <Link
                 to={`/movie/${movie.imdbID}`}
                 className={`text-lg font-bold mb-2 textedit ${
-                  themeMode === "dark" ? "text-black" : "text-black"
+                  themeMode === "dark" ? "text-black" : ""
                 }`}
               >
                 {movie.Title}

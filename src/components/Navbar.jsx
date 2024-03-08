@@ -55,7 +55,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`p-4 fixed top-0 w-full z-10 ${
+      className={`p-4 fixed top-0 w-full z-30 ${
         themeMode === "dark"
           ? "bg-gray-700 text-white"
           : "bg-gray-700 text-black"

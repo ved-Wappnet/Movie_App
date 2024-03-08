@@ -1,0 +1,15 @@
+.nav li {
+  position: relative;
+}
+
+.nav li:before {
+  content: "";
+  position: absolute;
+  top: -90%;
+  border: 2px solid transparent;
+}
+
+.nav li:hover:before {
+  background-color: #ab9d9d;
+  border-color: rgb(168 85 247);
+}

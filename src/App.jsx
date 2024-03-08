@@ -30,6 +30,7 @@ import Pricing from "./pages/Admin/Adminpages/Pricing";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import HomeDataLoader from "./pages/HomeDataLoader";
 
 function App() {
   const [themeMode, setThemeMode] = useState("light");
@@ -41,7 +42,7 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Outlet />}>
+        <Route path="/" element={<Outlet />} loader={HomeDataLoader}>
           <Route
             index
             element={

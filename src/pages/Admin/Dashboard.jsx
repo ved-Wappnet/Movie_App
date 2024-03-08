@@ -48,8 +48,8 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center mt-16 w-full">
-      <div className="w-full p-9 h-[100vh]">
+    <div className="flex flex-col items-center mt-16">
+      <div className=" p-9 h-[100vh] w-[1287px]">
         <div className="bg-gray-200 p-4 rounded-md mb-4">
           <input
             type="text"

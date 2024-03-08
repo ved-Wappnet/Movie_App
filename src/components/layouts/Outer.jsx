@@ -6,7 +6,7 @@ const Outer = ({ children }) => {
     <div>
       <Navbar />
       <div>{children}</div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
