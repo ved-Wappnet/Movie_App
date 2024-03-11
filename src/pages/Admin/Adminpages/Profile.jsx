@@ -13,7 +13,7 @@ const Profile = () => {
       <hr style={{ borderColor: "#ab9d9d", marginBottom: "20px" }} />
       {/* box */}
       <div className="box text-black bg-white h-80 w-full rounded">
-        <div className="halfup rounded-t relative">
+        <div className="halfup rounded-t relative md:relative">
           <img
             src="https://dash-ui-admin-template.vercel.app/images/background/profile-cover.jpg"
             alt=""
@@ -21,18 +21,18 @@ const Profile = () => {
           />
         </div>
         <div className="halfdown rounded-b flex">
-          <div className="absolute top-[38%] left-[18.5%]">
+          <div className="md:absolute absolute top-[33%] right-[0%] md:top-[38%] md:left-[18.5%] ">
             <img
               src="https://media.licdn.com/dms/image/D4D03AQEW0FV_w2pRlw/profile-displayphoto-shrink_100_100/0/1669697366136?e=1715212800&v=beta&t=cMigVBkT3aGJMDoQRZcOOOg8R5B29RZ3KUtpj15LiOY"
-              alt=""  
-              className="rounded-full h-28 outline-white outline"
+              alt=""
+              className="rounded-full h-28 outline-white outline z-10"
             />
           </div>
           <div className="ml-36 mt-5">
             <h2 className="font-medium text-3xl">Ved Panchal</h2>
             <p className="text-gray-500">@vedpanchal</p>
           </div>
-          <div className="ml-[65%] mt-7 mb-6">
+          <div className="md:ml-[65%] ml-[15%] mt-7 mb-6">
             <button className="h-10 w-28 bg-white rounded-xl px-3 border border-purple-500 font-medium hover:bg-purple-500 hover:text-white">
               Edit Profile
             </button>
@@ -113,7 +113,7 @@ const Profile = () => {
                   Projects Contributions
                 </h2>
                 <div className="flex gap-4 mb-4">
-                  <div className="img border border-gray-400 rounded py-3 px-2">
+                  <div className="img  md:border border-gray-400 rounded py-5 px-2 md:py-3 md:px-2">
                     <img
                       src="https://dash-ui-admin-template.vercel.app/images/brand/slack-logo.svg"
                       alt=""
@@ -145,7 +145,7 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 mb-4">
-                  <div className="img border border-gray-400 rounded py-3 px-2">
+                  <div className="img  md:border border-gray-400 rounded py-5 px-2 md:py-3 md:px-2">
                     <img
                       src="https://dash-ui-admin-template.vercel.app/images/brand/3dsmax-logo.svg"
                       alt=""
@@ -177,7 +177,7 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 mb-4">
-                  <div className="img border border-gray-400 rounded py-3 px-2">
+                  <div className="img  md:border border-gray-400 rounded py-5 px-2 md:py-3 md:px-2">
                     <img
                       src="https://dash-ui-admin-template.vercel.app/images/brand/github-logo.svg"
                       alt=""
@@ -209,7 +209,7 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 mb-4">
-                  <div className="img border border-gray-400 rounded py-3 px-2">
+                  <div className="img  md:border border-gray-400 rounded py-5 px-2 md:py-3 md:px-2">
                     <img
                       src="https://dash-ui-admin-template.vercel.app/images/brand/dropbox-logo.svg"
                       alt=""
@@ -241,7 +241,7 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className="flex gap-4 mb-4">
-                  <div className="img border border-gray-400 rounded py-3 px-2 bg-purple-500">
+                  <div className="img  md:border border-gray-400 rounded py-5 px-2 md:py-3 md:px-2 bg-purple-500 ">
                     <img
                       src="https://dash-ui-admin-template.vercel.app/images/brand/layers-logo.svg"
                       alt=""
@@ -289,12 +289,12 @@ const Profile = () => {
                     <img
                       src="https://media.licdn.com/dms/image/D4D03AQEW0FV_w2pRlw/profile-displayphoto-shrink_100_100/0/1669697366136?e=1715212800&v=beta&t=cMigVBkT3aGJMDoQRZcOOOg8R5B29RZ3KUtpj15LiOY"
                       alt=""
-                      className="h-12 w-12 rounded-full"
+                      className="h-12 w-60 rounded-full"
                     />
                   </div>
-                  <div className="ml-4 mb-0">
+                  <div className="ml-4 mb-0 w-full">
                     <h2 className="font-medium">Ved Panchal</h2>
-                    <p className="text-[#637381] ">19 minutes ago</p>
+                    <p className="text-[#637381]">19 minutes ago</p>
                   </div>
                   <div>
                     <BsThreeDotsVertical className="ml-96 mt-2" />

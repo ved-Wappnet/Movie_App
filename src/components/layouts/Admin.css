@@ -12,3 +12,13 @@
 .content {
   margin-left: 240px;
 }
+
+.sub-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0s ease;
+}
+
+.sub-menu.show {
+  max-height: 1000px;
+}
